@@ -2,248 +2,49 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Personal website of Abhijat Chaturvedi" />
-    <meta property="og:url" content="https://abhijatchaturvedi.github.io/" />
-    <meta property="og:type" content="profile" />
-    <meta property="og:title" content="Abhijat Chaturvedi" />
-    <meta property="og:description" content="AI Researcher, Data Scientist and Entrepreneur" />
-    <meta property="og:image" content="assets/img/profile.png" />
+    <link
+      href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+      rel="stylesheet"
+    />
 
-    <title>Abhijat Chaturvedi</title>
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="My name is Hashir Shoaib. I’m a graduate of 2020 from National University of Sciences and Technology at Islamabad with a degree in Computer Engineering. I'm most passionate about giving back to the community, and my goal is to pursue this passion within the field of software engineering. In my free time I like working on open source projects."
+    />
+    <link rel="apple-touch-icon" href="logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <meta property="twitter:image" content="%PUBLIC_URL%/social-image.png" />
+    <meta property="og:image" content="%PUBLIC_URL%/social-image.png" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Font Awesome and Academicons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700|Muli:400,400i,800,800i" rel="stylesheet" />
-
-    <!-- Custom CSS -->
-    <style>
-      body {
-        font-family: 'Muli', sans-serif;
-        background: #f8f9fa;
-      }
-      /* Sticky sidebar styles */
-      #sideNav {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 250px;
-        padding: 2rem 1rem;
-        background: #0d6efd;
-        overflow-y: auto;
-      }
-      #sideNav .nav-link {
-        color: #fff;
-        font-weight: 500;
-      }
-      #sideNav .nav-link:hover {
-        color: #ffc107;
-      }
-      .content {
-        margin-left: 270px;
-        padding: 2rem;
-      }
-      .img-profile {
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-        border: 5px solid #fff;
-      }
-      header h1 {
-        font-size: 2.5rem;
-      }
-      .social-icons a {
-        margin-right: 1rem;
-        font-size: 1.25rem;
-        color: #0d6efd;
-      }
-      .social-icons a:hover {
-        color: #ffc107;
-      }
-      /* Responsive adjustments */
-      @media (max-width: 992px) {
-        #sideNav {
-          width: 100%;
-          height: auto;
-          position: relative;
-        }
-        .content {
-          margin: 0;
-        }
-      }
-    </style>
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Hashir Shoaib</title>
   </head>
   <body>
-    <!-- Side Navigation -->
-    <nav id="sideNav" class="d-none d-lg-block">
-      <div class="text-center mb-4">
-        <img class="img-fluid rounded-circle img-profile" src="assets/img/profile.jpg" alt="Abhijat Chaturvedi" />
-        <h4 class="mt-2 text-white">Abhijat Chaturvedi</h4>
-      </div>
-      <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-        <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-        <li class="nav-item"><a class="nav-link" href="#ip">Intellectual Property</a></li>
-        <li class="nav-item"><a class="nav-link" href="#downloads">Downloads</a></li>
-      </ul>
-      <div class="text-center mt-4">
-        <a href="https://www.linkedin.com/in/abhijatchaturvedi" target="_blank" class="social-icons"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://github.com/abhijatchaturvedi" target="_blank" class="social-icons"><i class="fab fa-github"></i></a>
-        <a href="https://scholar.google.com/citations?user=K-EL0PQAAAAJ" target="_blank" class="social-icons"><i class="ai ai-google-scholar"></i></a>
-      </div>
-    </nav>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
 
-    <!-- Mobile Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary d-lg-none">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Abhijat Chaturvedi</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mobileNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-            <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-            <li class="nav-item"><a class="nav-link" href="#ip">Intellectual Property</a></li>
-            <li class="nav-item"><a class="nav-link" href="#downloads">Downloads</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
 
-    <!-- Page Content -->
-    <div class="content">
-      <!-- About Section -->
-      <section id="about" class="mb-5">
-        <header class="mb-4">
-          <h1>Hi, I'm Abhijat <span class="text-primary">Chaturvedi</span></h1>
-          <p class="lead">AI Researcher, Data Scientist & Entrepreneur</p>
-          <p>
-            <a href="mailto:abhijatchaturvedi@gmail.com" class="btn btn-outline-primary btn-sm">Get in Touch</a>
-          </p>
-        </header>
-        <p>I have over 3 years of experience working in artificial intelligence and data science. Currently, I work as an AI Researcher at CDAC, where I lead a cross-functional team developing innovative algorithms to help healthcare professionals achieve more. I'm passionate about creating trusted machine learning applications that enable people to navigate their goals.</p>
-        <p>Outside of work, I’m an avid traveler – having explored 30 cities so far – a book lover, and always up for a good coffee conversation. Feel free to connect!</p>
-      </section>
-
-      <hr />
-
-      <!-- Experience Section -->
-      <section id="experience" class="mb-5">
-        <h2 class="mb-4">Experience</h2>
-        <div class="mb-4">
-          <h4>Project Engineer</h4>
-          <small class="text-muted">Centre for Development of Advanced Computing | Nov 2020 - Present</small>
-        </div>
-        <div class="mb-4">
-          <h4>Project Associate</h4>
-          <small class="text-muted">Centre for Development of Advanced Computing | Aug 2018 - Oct 2020</small>
-        </div>
-        <div class="mb-4">
-          <h4>Co-Founder</h4>
-          <small class="text-muted">el-Comrades | March 2020 - Present</small>
-        </div>
-        <div class="mb-4">
-          <h4>AI Team Lead</h4>
-          <small class="text-muted">ThinkPen | Aug 2018 - Present</small>
-        </div>
-      </section>
-
-      <hr />
-
-      <!-- Education Section -->
-      <section id="education" class="mb-5">
-        <h2 class="mb-4">Education</h2>
-        <div class="mb-4">
-          <h4>Indian Institute of Technology</h4>
-          <small class="text-muted">Master of Technology, Artificial Intelligence | Feb 2021 - May 2024</small>
-        </div>
-        <div class="mb-4">
-          <h4>Centre for Development of Advanced Computing</h4>
-          <small class="text-muted">PG Diploma, Big Data Technologies | Feb 2018 - July 2018</small>
-        </div>
-        <div class="mb-4">
-          <h4>Greater Noida Institute of Technology</h4>
-          <small class="text-muted">Bachelor of Technology, Information Technology | Aug 2013 - May 2017</small>
-        </div>
-      </section>
-
-      <hr />
-
-      <!-- Intellectual Property Section -->
-      <section id="ip" class="mb-5">
-        <h2 class="mb-4">Intellectual Property</h2>
-        <div class="mb-3">
-          <h5>
-            <i class="fas fa-trophy text-warning"></i>
-            Best Paper Award – Questionnaire-Based Prediction of Hypertension Using Machine Learning
-          </h5>
-          <p class="mb-0">A Chaturvedi, S Srivastava, A Rai, AS Cheema, D Chelimela – Evolving Technologies for Computing, Communication and Smart World, 2020</p>
-        </div>
-        <div class="mb-3">
-          <h5>
-            <i class="far fa-sticky-note"></i>
-            A Hybrid Approach to Develop and Integrate Chatbot in Health Informatics Systems
-          </h5>
-          <p class="mb-0">A Chaturvedi, S Srivastava, A Rai, AS Cheema – HEALTHINF, 2020</p>
-        </div>
-        <div class="mb-3">
-          <h5>
-            <i class="far fa-sticky-note"></i>
-            Study and Analysis of Unique Health Identifiers and Applicability of Aadhaar as a Unique Health Identifier
-          </h5>
-          <p class="mb-0">A Chaturvedi, S Srivastava, A Rai, AS Cheema, D Chelimela – IEEE INDICON, 2020</p>
-        </div>
-        <div class="mb-3">
-          <h5>
-            <i class="fas fa-copyright"></i>
-            Probabilistic Investigation Recommendation System
-          </h5>
-          <p class="mb-0">Abhijat Chaturvedi, Vivek Khaneja, Praveen Kumar Srivastava, Astha Rai, Siddharth Srivastava, Amarjeet Singh Cheema – ROC No: SW-14415/2021</p>
-        </div>
-        <div class="mb-3">
-          <h5>
-            <i class="fas fa-copyright"></i>
-            RaktBot: An AI Based Citizen-Centric Chatbot for Blood Related Services
-          </h5>
-          <p class="mb-0">Abhijat Chaturvedi, Vivek Khaneja, Praveen Kumar Srivastava, Astha Rai, Siddharth Srivastava, Amarjeet Singh Cheema – ROC No: SW-14403/2021</p>
-        </div>
-      </section>
-
-      <hr />
-
-      <!-- Downloads Section -->
-      <section id="downloads" class="mb-5">
-        <h2 class="mb-4">Downloads</h2>
-        <p>
-          <i class="far fa-file-alt me-2"></i>
-          <a href="CV_Abhijat_Chaturvedi.pdf" download="CV_Abhijat_Chaturvedi.pdf" class="text-decoration-none">Download CV</a>
-        </p>
-      </section>
-    </div>
-
-    <!-- Bootstrap 5 JS Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Optional: Smooth scrolling for in-page links -->
-    <script>
-      document.querySelectorAll('a.nav-link').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-          });
-        });
-      });
-    </script>
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
   </body>
 </html>
