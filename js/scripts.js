@@ -1,6 +1,24 @@
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
+const themeToggle = document.querySelector(".theme-toggle");
 const year = document.querySelector("#current-year");
+const themeIcon = themeToggle?.querySelector("i");
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+const applyTheme = (theme) => {
+    document.documentElement.dataset.theme = theme;
+
+    if (!themeToggle || !themeIcon) {
+        return;
+    }
+
+    const isDark = theme === "dark";
+    themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+    themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon";
+};
+
+const savedTheme = localStorage.getItem("theme");
+applyTheme(savedTheme || (prefersDark.matches ? "dark" : "light"));
 
 if (year) {
     year.textContent = new Date().getFullYear();
@@ -21,6 +39,20 @@ if (navToggle && navLinks) {
         });
     });
 }
+
+if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+        const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        localStorage.setItem("theme", nextTheme);
+        applyTheme(nextTheme);
+    });
+}
+
+prefersDark.addEventListener("change", (event) => {
+    if (!localStorage.getItem("theme")) {
+        applyTheme(event.matches ? "dark" : "light");
+    }
+});
 
 const sections = Array.from(document.querySelectorAll("main section[id]"));
 const navItems = Array.from(document.querySelectorAll(".nav-links a"));
