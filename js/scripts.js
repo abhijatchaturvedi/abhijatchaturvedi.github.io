@@ -6,6 +6,8 @@ const themeIcon = themeToggle?.querySelector("i");
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 const repoList = document.querySelector("#github-repo-list");
 const repoStatus = document.querySelector("#github-repo-status");
+const mediumPostList = document.querySelector("#medium-post-list");
+const mediumPostStatus = document.querySelector("#medium-post-status");
 
 const applyTheme = (theme) => {
     document.documentElement.dataset.theme = theme;
@@ -194,3 +196,88 @@ const loadGitHubRepos = async () => {
 };
 
 loadGitHubRepos();
+
+const stripHtml = (html) => {
+    const template = document.createElement("template");
+    template.innerHTML = html || "";
+    return template.content.textContent.trim();
+};
+
+const createMediumCard = (post) => {
+    const article = document.createElement("article");
+    article.className = "repo-card";
+
+    const title = document.createElement("h3");
+    const link = document.createElement("a");
+    link.href = post.link;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = post.title;
+
+    const icon = document.createElement("i");
+    icon.className = "fab fa-medium-m";
+    icon.setAttribute("aria-hidden", "true");
+
+    title.append(link, icon);
+
+    const description = document.createElement("p");
+    description.className = "repo-description";
+    const summary = stripHtml(post.description).replace(/\s+/g, " ");
+    description.textContent = summary.length > 160 ? `${summary.slice(0, 157)}...` : summary || "Read this literary piece on Medium.";
+
+    const meta = document.createElement("div");
+    meta.className = "repo-meta";
+
+    const date = document.createElement("span");
+    date.innerHTML = '<i class="fas fa-calendar-alt" aria-hidden="true"></i>';
+    date.append(document.createTextNode(formatUpdatedDate(post.pubDate)));
+
+    const source = document.createElement("span");
+    source.innerHTML = '<i class="fab fa-medium-m" aria-hidden="true"></i>';
+    source.append(document.createTextNode("Medium"));
+
+    meta.append(date, source);
+    article.append(title, description, meta);
+
+    return article;
+};
+
+const loadMediumPosts = async () => {
+    if (!mediumPostList || !mediumPostStatus) {
+        return;
+    }
+
+    const feedUrl = encodeURIComponent("https://abhijatchaturvedi.medium.com/feed");
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`;
+
+    try {
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+            throw new Error(`Medium feed returned ${response.status}`);
+        }
+
+        const feed = await response.json();
+
+        if (feed.status !== "ok" || !Array.isArray(feed.items)) {
+            throw new Error("Medium feed response was not valid");
+        }
+
+        const posts = feed.items.slice(0, 6);
+        mediumPostList.replaceChildren();
+
+        if (!posts.length) {
+            mediumPostStatus.textContent = "No Medium literary pieces found.";
+            mediumPostList.innerHTML = '<p class="repo-empty">No Medium literary pieces are available to display right now.</p>';
+            return;
+        }
+
+        posts.forEach((post) => mediumPostList.appendChild(createMediumCard(post)));
+        mediumPostStatus.textContent = `Showing ${posts.length} latest literary pieces from Medium.`;
+    } catch (error) {
+        mediumPostStatus.textContent = "Unable to load Medium literary pieces right now.";
+        mediumPostList.innerHTML = '<p class="repo-empty">Medium writing could not be fetched. Use the Medium link above to view posts directly.</p>';
+    }
+};
+
+loadMediumPosts();
