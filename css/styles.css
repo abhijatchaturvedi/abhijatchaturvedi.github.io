@@ -194,6 +194,25 @@ h2,
 h3,
 p {
     margin-top: 0;
+    text-align: justify;
+}
+
+.eyebrow,
+.brand span,
+.nav-links a,
+.button,
+.meta,
+.date-pill,
+.timeline-date,
+.stats-grid span,
+.repo-meta,
+.repo-toolbar p,
+.site-footer p {
+    text-align: left;
+}
+
+.contact-section p {
+    text-align: left;
 }
 
 h1 {
