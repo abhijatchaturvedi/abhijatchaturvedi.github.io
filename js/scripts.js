@@ -175,7 +175,7 @@ const loadGitHubRepos = async () => {
 
         const repos = await response.json();
         const visibleRepos = repos
-            .filter((repo) => !repo.fork && !repo.archived && repo.name !== "abhijatchaturvedi.github.io")
+            .filter((repo) => !repo.fork && !repo.archived && !["abhijatchaturvedi.github.io", "abhijatchaturvedi"].includes(repo.name))
             .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
             .slice(0, 6);
 
