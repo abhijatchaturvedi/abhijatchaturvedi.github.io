@@ -496,6 +496,22 @@ h3 {
     padding: 24px;
 }
 
+.info-card .card-meta {
+    margin-bottom: 10px;
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.info-card .card-tags {
+    margin-top: 12px;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
 .repo-toolbar {
     display: flex;
     align-items: center;
