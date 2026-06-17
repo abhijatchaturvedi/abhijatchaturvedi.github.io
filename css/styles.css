@@ -454,6 +454,22 @@ h3 {
     box-shadow: 0 14px 40px rgba(23, 32, 42, 0.06);
 }
 
+.org-logo {
+    display: block;
+    height: 36px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    margin-bottom: 14px;
+    filter: none;
+}
+
+:root[data-theme="dark"] .org-logo {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
 .timeline-card {
     position: relative;
     padding: 24px;
