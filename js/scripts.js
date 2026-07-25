@@ -8,6 +8,8 @@ const repoList = document.querySelector("#github-repo-list");
 const repoStatus = document.querySelector("#github-repo-status");
 const mediumPostList = document.querySelector("#medium-post-list");
 const mediumPostStatus = document.querySelector("#medium-post-status");
+const devtoPostList = document.querySelector("#devto-post-list");
+const devtoPostStatus = document.querySelector("#devto-post-status");
 
 const applyTheme = (theme) => {
     document.documentElement.dataset.theme = theme;
@@ -281,3 +283,82 @@ const loadMediumPosts = async () => {
 };
 
 loadMediumPosts();
+
+const createDevtoCard = (post) => {
+    const article = document.createElement("article");
+    article.className = "repo-card";
+
+    const title = document.createElement("h3");
+    const link = document.createElement("a");
+    link.href = post.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = post.title;
+
+    const icon = document.createElement("i");
+    icon.className = "fab fa-dev";
+    icon.setAttribute("aria-hidden", "true");
+
+    title.append(link, icon);
+
+    const description = document.createElement("p");
+    description.className = "repo-description";
+    const summary = (post.description || "").replace(/\s+/g, " ").trim();
+    description.textContent = summary.length > 160 ? `${summary.slice(0, 157)}...` : summary || "Read this technical article on dev.to.";
+
+    const meta = document.createElement("div");
+    meta.className = "repo-meta";
+
+    const date = document.createElement("span");
+    date.innerHTML = '<i class="fas fa-calendar-alt" aria-hidden="true"></i>';
+    date.append(document.createTextNode(formatUpdatedDate(post.published_at)));
+
+    const reactions = document.createElement("span");
+    reactions.innerHTML = '<i class="fas fa-heart" aria-hidden="true"></i>';
+    reactions.append(document.createTextNode(post.positive_reactions_count));
+
+    const comments = document.createElement("span");
+    comments.innerHTML = '<i class="fas fa-comment" aria-hidden="true"></i>';
+    comments.append(document.createTextNode(post.comments_count));
+
+    meta.append(date, reactions, comments);
+    article.append(title, description, meta);
+
+    return article;
+};
+
+const loadDevtoPosts = async () => {
+    if (!devtoPostList || !devtoPostStatus) {
+        return;
+    }
+
+    try {
+        const response = await fetch("https://dev.to/api/articles?username=abhijat_chaturvedi&per_page=6");
+
+        if (!response.ok) {
+            throw new Error(`dev.to API returned ${response.status}`);
+        }
+
+        const posts = await response.json();
+
+        if (!Array.isArray(posts)) {
+            throw new Error("dev.to API response was not valid");
+        }
+
+        devtoPostList.replaceChildren();
+
+        if (!posts.length) {
+            devtoPostStatus.textContent = "New technical articles are on the way.";
+            devtoPostList.innerHTML = '<p class="repo-empty">No dev.to articles are published yet. Check back soon or follow along on dev.to.</p>';
+            return;
+        }
+
+        posts.forEach((post) => devtoPostList.appendChild(createDevtoCard(post)));
+        devtoPostStatus.textContent = `Showing ${posts.length} latest technical articles from dev.to.`;
+    } catch (error) {
+        devtoPostStatus.textContent = "Unable to load dev.to articles right now.";
+        devtoPostList.innerHTML = '<p class="repo-empty">Dev.to articles could not be fetched. Use the dev.to link above to view them directly.</p>';
+    }
+};
+
+loadDevtoPosts();
