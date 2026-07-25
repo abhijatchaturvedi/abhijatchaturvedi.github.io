@@ -1,0 +1,33 @@
+name: Refresh dev.to posts
+
+on:
+  schedule:
+    - cron: "20 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-devto-posts
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Fetch latest dev.to articles
+        run: |
+          curl -sf "https://dev.to/api/articles?username=abhijat_chaturvedi&per_page=6" -o data/devto-posts.json
+          node -e "JSON.parse(require('fs').readFileSync('data/devto-posts.json'))"
+
+      - name: Commit dev.to posts cache
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "refresh dev.to posts cache"
+          branch: main
+          file_pattern: data/devto-posts.json

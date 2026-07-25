@@ -333,10 +333,10 @@ const loadDevtoPosts = async () => {
     }
 
     try {
-        const response = await fetch("https://dev.to/api/articles?username=abhijat_chaturvedi&per_page=6");
+        const response = await fetch("data/devto-posts.json", { cache: "no-store" });
 
         if (!response.ok) {
-            throw new Error(`dev.to API returned ${response.status}`);
+            throw new Error(`devto-posts.json returned ${response.status}`);
         }
 
         const posts = await response.json();
