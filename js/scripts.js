@@ -108,9 +108,32 @@ const getLanguageColor = (language) => {
     return colors[language] || "var(--accent)";
 };
 
+const createCardMedia = (src, alt) => {
+    if (!src) {
+        return null;
+    }
+
+    const img = document.createElement("img");
+    img.className = "repo-card-media";
+    img.src = src;
+    img.alt = alt;
+    img.loading = "lazy";
+    img.addEventListener("error", () => img.remove(), { once: true });
+    return img;
+};
+
+const extractFirstImage = (html) => {
+    const template = document.createElement("template");
+    template.innerHTML = html || "";
+    return template.content.querySelector("img")?.src || "";
+};
+
 const createRepoCard = (repo) => {
     const article = document.createElement("article");
     article.className = "repo-card";
+
+    const body = document.createElement("div");
+    body.className = "repo-card-body";
 
     const description = repo.description || "Public repository by Abhijat Chaturvedi.";
     const language = repo.language || "Code";
@@ -154,7 +177,8 @@ const createRepoCard = (repo) => {
     updatedElement.append(document.createTextNode(formatUpdatedDate(repo.updated_at)));
 
     meta.append(languageElement, starsElement, forksElement, updatedElement);
-    article.append(title, descriptionElement, meta);
+    body.append(title, descriptionElement, meta);
+    article.append(body);
 
     return article;
 };
@@ -209,6 +233,15 @@ const createMediumCard = (post) => {
     const article = document.createElement("article");
     article.className = "repo-card";
 
+    const imageUrl = post.thumbnail || extractFirstImage(post.content);
+    const media = createCardMedia(imageUrl, post.title);
+    if (media) {
+        article.append(media);
+    }
+
+    const body = document.createElement("div");
+    body.className = "repo-card-body";
+
     const title = document.createElement("h3");
     const link = document.createElement("a");
     link.href = post.link;
@@ -239,7 +272,8 @@ const createMediumCard = (post) => {
     source.append(document.createTextNode("Medium"));
 
     meta.append(date, source);
-    article.append(title, description, meta);
+    body.append(title, description, meta);
+    article.append(body);
 
     return article;
 };
@@ -288,6 +322,14 @@ const createDevtoCard = (post) => {
     const article = document.createElement("article");
     article.className = "repo-card";
 
+    const media = createCardMedia(post.cover_image || post.social_image, post.title);
+    if (media) {
+        article.append(media);
+    }
+
+    const body = document.createElement("div");
+    body.className = "repo-card-body";
+
     const title = document.createElement("h3");
     const link = document.createElement("a");
     link.href = post.url;
@@ -322,7 +364,8 @@ const createDevtoCard = (post) => {
     comments.append(document.createTextNode(post.comments_count));
 
     meta.append(date, reactions, comments);
-    article.append(title, description, meta);
+    body.append(title, description, meta);
+    article.append(body);
 
     return article;
 };
