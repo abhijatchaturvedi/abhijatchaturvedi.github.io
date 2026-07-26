@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: master
 
       - name: Fetch latest dev.to articles
         run: |
@@ -29,5 +29,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "refresh dev.to posts cache"
-          branch: main
+          branch: master
           file_pattern: data/devto-posts.json
