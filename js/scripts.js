@@ -132,6 +132,11 @@ const createRepoCard = (repo) => {
     const article = document.createElement("article");
     article.className = "repo-card";
 
+    const media = createCardMedia(`https://opengraph.githubassets.com/1/${repo.full_name}`, repo.name);
+    if (media) {
+        article.append(media);
+    }
+
     const body = document.createElement("div");
     body.className = "repo-card-body";
 
