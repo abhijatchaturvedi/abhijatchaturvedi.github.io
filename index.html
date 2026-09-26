@@ -23,7 +23,7 @@
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
         <link href="css/styles.css" rel="stylesheet" />
@@ -60,9 +60,10 @@
 
         <main id="home">
             <section class="hero section">
+                <div class="section-bg" aria-hidden="true"></div>
                 <div class="hero-content">
                     <p class="eyebrow">Senior AI Lead | Applied AI Scientist | GenAI | Computer Vision</p>
-                    <h1>I build AI systems that move from research ideas to real products.</h1>
+                    <h1>I build AI systems that move from research ideas to <span class="serif-accent text-gradient">real products.</span></h1>
                     <p class="hero-copy">
                         I work as a senior AI lead and applied machine learning scientist. Over the last seven years, I have
                         worked on Generative AI, RAG, LLM agents, computer vision, and healthcare intelligence, with a strong
@@ -109,7 +110,7 @@
                 </aside>
             </section>
 
-            <section class="section split-section" id="about">
+            <section data-reveal class="section split-section" id="about">
                 <div class="section-heading">
                     <p class="eyebrow">About</p>
                     <h2>Research-minded, product-aware AI work.</h2>
@@ -137,7 +138,7 @@
                 </div>
             </section>
 
-            <section class="section" id="experience">
+            <section data-reveal class="section" id="experience">
                 <div class="section-heading wide">
                     <p class="eyebrow">Experience</p>
                     <h2>Work so far</h2>
@@ -191,7 +192,7 @@
                 </div>
             </section>
 
-            <section class="section" id="skills">
+            <section data-reveal class="section" id="skills">
                 <div class="section-heading wide">
                     <p class="eyebrow">Skills</p>
                     <h2>Things I work with</h2>
@@ -216,7 +217,7 @@
                 </div>
             </section>
 
-            <section class="section" id="education">
+            <section data-reveal class="section" id="education">
                 <div class="section-heading wide">
                     <p class="eyebrow">Education</p>
                     <h2>Alma Mater</h2>
@@ -246,7 +247,7 @@
                 </div>
             </section>
 
-            <section class="section" id="research">
+            <section data-reveal class="section" id="research">
                 <div class="section-heading wide">
                     <p class="eyebrow">Research & IP</p>
                     <h2>Selected work</h2>
@@ -296,7 +297,7 @@
                 </div>
             </section>
 
-            <section class="section" id="projects">
+            <section data-reveal class="section" id="projects">
                 <div class="section-heading wide">
                     <p class="eyebrow">Projects</p>
                     <h2>Selected projects</h2>
@@ -376,7 +377,7 @@
                 </div>
             </section>
 
-            <section class="section" id="github-repos">
+            <section data-reveal class="section" id="github-repos">
                 <div class="section-heading wide">
                     <p class="eyebrow">GitHub</p>
                     <h2>Latest public repositories</h2>
@@ -394,7 +395,7 @@
                 <div class="repo-grid" id="github-repo-list" aria-live="polite"></div>
             </section>
 
-            <section class="section" id="devto-posts">
+            <section data-reveal class="section" id="devto-posts">
                 <div class="section-heading wide">
                     <p class="eyebrow">Tech Blog</p>
                     <h2>Technical writing</h2>
@@ -413,7 +414,7 @@
                 <div class="repo-grid" id="devto-post-list" aria-live="polite"></div>
             </section>
 
-            <section class="section" id="medium-posts">
+            <section data-reveal class="section" id="medium-posts">
                 <div class="section-heading wide">
                     <p class="eyebrow">Blog</p>
                     <h2>Literary writing</h2>
@@ -432,28 +433,31 @@
                 <div class="repo-grid" id="medium-post-list" aria-live="polite"></div>
             </section>
 
-            <section class="section contact-section" id="contact">
-                <div>
-                    <p class="eyebrow">Contact</p>
-                    <h2>Let us connect.</h2>
-                    <p>
-                        I am open to conversations around AI leadership, applied research, Generative AI, RAG, LLM agents,
-                        computer vision, ML platforms, and thoughtful AI product work.
-                    </p>
-                </div>
-                <div class="contact-actions">
-                    <a class="button primary" href="mailto:abhijatchaturvedi@gmail.com">
-                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                        abhijatchaturvedi@gmail.com
-                    </a>
-                    <a class="button secondary" href="https://github.com/abhijatchaturvedi" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-github" aria-hidden="true"></i>
-                        GitHub
-                    </a>
-                    <a class="button secondary" href="https://abhijatchaturvedi.medium.com" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-medium-m" aria-hidden="true"></i>
-                        Blog
-                    </a>
+            <section data-reveal class="section contact-section" id="contact">
+                <div class="contact-card">
+                    <div class="section-bg" aria-hidden="true"></div>
+                    <div>
+                        <p class="eyebrow">Contact</p>
+                        <h2>Let us <span class="serif-accent text-gradient">connect.</span></h2>
+                        <p>
+                            I am open to conversations around AI leadership, applied research, Generative AI, RAG, LLM agents,
+                            computer vision, ML platforms, and thoughtful AI product work.
+                        </p>
+                    </div>
+                    <div class="contact-actions">
+                        <a class="button primary" href="mailto:abhijatchaturvedi@gmail.com">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            abhijatchaturvedi@gmail.com
+                        </a>
+                        <a class="button secondary" href="https://github.com/abhijatchaturvedi" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                            GitHub
+                        </a>
+                        <a class="button secondary" href="https://abhijatchaturvedi.medium.com" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-medium-m" aria-hidden="true"></i>
+                            Blog
+                        </a>
+                    </div>
                 </div>
             </section>
         </main>
@@ -462,6 +466,7 @@
             <p>&copy; <span id="current-year"></span> Abhijat Chaturvedi. Built with GitHub Pages.</p>
         </footer>
 
+        <script src="js/cursor.js"></script>
         <script src="js/scripts.js"></script>
     </body>
 </html>

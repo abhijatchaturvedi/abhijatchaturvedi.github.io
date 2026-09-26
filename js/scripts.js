@@ -85,6 +85,65 @@ if ("IntersectionObserver" in window && sections.length && navItems.length) {
     sections.forEach((section) => observer.observe(section));
 }
 
+const revealSections = Array.from(document.querySelectorAll("[data-reveal]"));
+
+if ("IntersectionObserver" in window && revealSections.length) {
+    const revealObserver = new IntersectionObserver(
+        (entries, obs) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+            });
+        },
+        { rootMargin: "-70px", threshold: 0 }
+    );
+
+    revealSections.forEach((section) => revealObserver.observe(section));
+} else {
+    revealSections.forEach((section) => section.classList.add("is-visible"));
+}
+
+/* Cards/list items reveal (and stagger) individually within their own grid or
+   list, so a row cascades in card by card instead of the whole block at once. */
+const itemObserver =
+    "IntersectionObserver" in window
+        ? new IntersectionObserver(
+              (entries, obs) => {
+                  entries.forEach((entry) => {
+                      if (!entry.isIntersecting) {
+                          return;
+                      }
+                      entry.target.classList.add("is-visible");
+                      obs.unobserve(entry.target);
+                  });
+              },
+              { rootMargin: "-60px", threshold: 0.05 }
+          )
+        : null;
+
+const revealItems = (container) => {
+    if (!container) {
+        return;
+    }
+    Array.from(container.children).forEach((el, i) => {
+        if (el.classList.contains("reveal-item")) {
+            return;
+        }
+        el.classList.add("reveal-item");
+        el.style.transitionDelay = `${Math.min(i, 5) * 70}ms`;
+        if (itemObserver) {
+            itemObserver.observe(el);
+        } else {
+            el.classList.add("is-visible");
+        }
+    });
+};
+
+document.querySelectorAll(".timeline, .card-grid, .work-list").forEach(revealItems);
+
 const formatUpdatedDate = (dateString) =>
     new Intl.DateTimeFormat("en", {
         month: "short",
@@ -219,6 +278,7 @@ const loadGitHubRepos = async () => {
         }
 
         visibleRepos.forEach((repo) => repoList.appendChild(createRepoCard(repo)));
+        revealItems(repoList);
         repoStatus.textContent = `Showing ${visibleRepos.length} recently updated public repositories.`;
     } catch (error) {
         repoStatus.textContent = "Unable to load repositories from GitHub right now.";
@@ -314,6 +374,7 @@ const loadMediumPosts = async () => {
         }
 
         posts.forEach((post) => mediumPostList.appendChild(createMediumCard(post)));
+        revealItems(mediumPostList);
         mediumPostStatus.textContent = `Showing ${posts.length} latest literary pieces from Medium.`;
     } catch (error) {
         mediumPostStatus.textContent = "Unable to load Medium literary pieces right now.";
@@ -402,6 +463,7 @@ const loadDevtoPosts = async () => {
         }
 
         posts.forEach((post) => devtoPostList.appendChild(createDevtoCard(post)));
+        revealItems(devtoPostList);
         devtoPostStatus.textContent = `Showing ${posts.length} latest technical articles from dev.to.`;
     } catch (error) {
         devtoPostStatus.textContent = "Unable to load dev.to articles right now.";
