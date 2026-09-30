@@ -153,6 +153,12 @@ const revealItems = (container) => {
         }
         el.classList.add("reveal-item");
         el.style.transitionDelay = `${Math.min(i, 5) * 70}ms`;
+        /* Drop the stagger delay once revealed so hover effects stay instant. */
+        el.addEventListener("transitionend", (event) => {
+            if (event.propertyName === "opacity") {
+                el.style.transitionDelay = "";
+            }
+        });
         if (itemObserver) {
             itemObserver.observe(el);
         } else {

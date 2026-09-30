@@ -602,6 +602,14 @@ h3 {
     transform: translateY(-2px);
 }
 
+/* These cards are themselves the .reveal-item, and the card transition above
+   would otherwise replace the reveal transition (dropping the opacity fade). */
+.reveal-item.info-card,
+.reveal-item.work-item,
+.reveal-item.repo-card {
+    transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
 .org-logo {
     display: block;
     height: 34px;
