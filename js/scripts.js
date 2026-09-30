@@ -26,6 +26,25 @@ const applyTheme = (theme) => {
 const savedTheme = localStorage.getItem("theme");
 applyTheme(savedTheme || (prefersDark.matches ? "dark" : "light"));
 
+/* Career started Aug 2018; show completed years so the copy never goes stale. */
+const CAREER_START = new Date(2018, 7, 1);
+const careerYears = (() => {
+    const now = new Date();
+    let years = now.getFullYear() - CAREER_START.getFullYear();
+    if (now < new Date(now.getFullYear(), CAREER_START.getMonth(), CAREER_START.getDate())) {
+        years -= 1;
+    }
+    return years;
+})();
+const numberWords = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
+
+document.querySelectorAll("[data-career-years]").forEach((el) => {
+    el.textContent = careerYears;
+});
+document.querySelectorAll("[data-career-years-words]").forEach((el) => {
+    el.textContent = numberWords[careerYears] || careerYears;
+});
+
 if (year) {
     year.textContent = new Date().getFullYear();
 }
