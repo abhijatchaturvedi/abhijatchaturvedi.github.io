@@ -469,7 +469,7 @@ h3 {
 }
 
 .stats-grid strong,
-.stats-grid span {
+.stats-grid div > span {
     display: block;
 }
 
@@ -481,7 +481,7 @@ h3 {
     font-variant-numeric: tabular-nums;
 }
 
-.stats-grid span {
+.stats-grid div > span {
     margin-top: 8px;
     color: var(--muted);
     font-size: 0.76rem;
