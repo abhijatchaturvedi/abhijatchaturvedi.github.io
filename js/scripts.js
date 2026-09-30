@@ -247,23 +247,57 @@ const createRepoCard = (repo) => {
     return article;
 };
 
+/* Cache third-party feed responses for an hour and fall back to the last good
+   copy if the API is rate-limited or down. */
+const fetchJsonCached = async (key, url, options) => {
+    const cacheKey = `feed:${key}`;
+    let cached = null;
+
+    try {
+        cached = JSON.parse(localStorage.getItem(cacheKey));
+    } catch (error) {
+        cached = null;
+    }
+
+    if (cached && Date.now() - cached.time < 60 * 60 * 1000) {
+        return cached.data;
+    }
+
+    try {
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+            throw new Error(`${key} returned ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        try {
+            localStorage.setItem(cacheKey, JSON.stringify({ time: Date.now(), data }));
+        } catch (error) {
+            /* storage unavailable or full - ignore */
+        }
+
+        return data;
+    } catch (error) {
+        if (cached) {
+            return cached.data;
+        }
+        throw error;
+    }
+};
+
 const loadGitHubRepos = async () => {
     if (!repoList || !repoStatus) {
         return;
     }
 
     try {
-        const response = await fetch("https://api.github.com/users/abhijatchaturvedi/repos?sort=updated&per_page=100", {
+        const repos = await fetchJsonCached("github", "https://api.github.com/users/abhijatchaturvedi/repos?sort=updated&per_page=100", {
             headers: {
                 Accept: "application/vnd.github+json",
             },
         });
-
-        if (!response.ok) {
-            throw new Error(`GitHub API returned ${response.status}`);
-        }
-
-        const repos = await response.json();
         const visibleRepos = repos
             .filter((repo) => !repo.fork && !repo.archived && !["abhijatchaturvedi.github.io", "abhijatchaturvedi"].includes(repo.name))
             .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
@@ -352,13 +386,7 @@ const loadMediumPosts = async () => {
     const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`;
 
     try {
-        const response = await fetch(apiUrl);
-
-        if (!response.ok) {
-            throw new Error(`Medium feed returned ${response.status}`);
-        }
-
-        const feed = await response.json();
+        const feed = await fetchJsonCached("medium", apiUrl);
 
         if (feed.status !== "ok" || !Array.isArray(feed.items)) {
             throw new Error("Medium feed response was not valid");

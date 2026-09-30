@@ -15,20 +15,21 @@ prompt for a new project that looks consistent with the rest of the set.
    `card-tags`) to understand its domain and the concrete thing that was built.
 2. Read `css/styles.css` and pull the current palette values so the prompt stays correct
    even if the theme changes later:
-   - light mode `--bg`, `--primary`, `--accent` (near the top of the file, `:root`)
+   - light mode `--bg`, `--surface`, `--text`, `--accent`, `--accent-strong` (near the top
+     of the file, `:root`)
    - dark mode equivalents (`:root[data-theme="dark"]`)
 3. Check the media aspect ratio the card will crop to — look at `.repo-card-media` (or
-   whatever class the project cards use for images) for the `height` it's cropped to
+   whatever class the project cards use for images) for the `aspect-ratio` it's cropped to
    with `object-fit: cover`, so the prompt requests a matching wide landscape ratio
-   (currently ~1200x630).
+   (currently 1200x634).
 4. Build the prompt from two parts:
 
    **Shared style prefix** (reuse verbatim for every project so the set stays cohesive):
 
    > Minimalist flat-design tech illustration, isometric or geometric composition, wide
-   > landscape format (1200x630), clean vector-art look, muted teal (`<light --primary>`)
-   > and warm burnt-orange (`<light --accent>`) accents on a soft cream (`<light --bg>`)
-   > background, subtle abstract grid/circuit-line texture, generous negative space, no
+   > landscape format (1200x634), clean vector-art look, sky-blue (`<light --accent>`)
+   > and deeper blue (`<light --accent-strong>`) accents on a near-white neutral
+   > (`<light --bg>`) background with dark navy (`<light --text>`) line details, subtle abstract grid-line texture (like the site's hero grid), generous negative space, no
    > text, no logos, no watermarks, no photorealistic human faces.
 
    Swap in the actual hex values read in step 2 — don't hardcode the ones in this file,
@@ -55,7 +56,7 @@ prompt for a new project that looks consistent with the rest of the set.
 
 ## Notes
 
-- Keep every prompt in the same style family — that's what makes the six-plus cards read
-  as one designed set instead of six unrelated images.
+- Keep every prompt in the same style family — that's what makes the project cards read
+  as one designed set instead of unrelated images.
 - If the palette or card aspect ratio in the CSS has changed since this skill was written,
   trust the CSS over anything cached in this file or in prior conversations.
